@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大頭蝦啤酒屋 點餐系統</title>
+    <style>
+        body {
+            font-family: "Arial", "微軟正黑體", sans-serif;
+            background-color: #fff8f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #b22222;
+        }
+        .mode-select {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu-section {
+            margin-bottom: 30px;
+        }
+        .menu-section h3 {
+            color: #333;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+        .item input {
+            width: 50px;
+            text-align: center;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: #b22222;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>大頭蝦啤酒屋</h1>
+    <h2>掃碼點餐系統</h2>
+    <div class="mode-select">
+        <label><input type="radio" name="mode"> 內用</label>
+        <label><input type="radio" name="mode"> 外帶</label>
+        <label><input type="radio" name="mode"> 外送</label>
+    </div>
+
+    <div class="menu-section"><h3>活蝦料理</h3>
+        <div class="item">
+            <span>鹽烤蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>鹽烤蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>鹽烤蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>胡椒蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>胡椒蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>胡椒蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>蒜頭蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>蒜頭蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>蒜頭蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>白灼蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>白灼蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>白灼蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>冰鎮蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>冰鎮蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>冰鎮蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>鹹酥蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>鹹酥蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>鹹酥蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>奶油蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>奶油蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>奶油蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>麻奶蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>麻奶蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>麻奶蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>香辣啤酒蝦（綜合蝦M）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>香辣啤酒蝦（綜合蝦L）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item">
+            <span>香辣啤酒蝦（大公蝦）</span>
+            <div style="display: flex; align-items: center;">
+                <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+                <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+                <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+            </div>
+        </div>
+        <div class="item"><span>藥膳蝦鍋 - $950</span><div style="display: flex; align-items: center;">
+            <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+            <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+            <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+        </div></div>
+        <div class="item"><span>燒酒蝦鍋 - $1050</span><div style="display: flex; align-items: center;">
+            <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+            <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+            <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+        </div></div>
+        <div class="item"><span>藥膳蝦雞鍋 - $1200</span><div style="display: flex; align-items: center;">
+            <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+            <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+            <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+        </div></div>
+    </div>
+
+        <div class="item"><span>綜合蝦小份 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>綜合蝦大份 - $800</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>大公蝦 - $800</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鹽烤蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>胡椒蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蒜頭蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>白灼蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>冰鎮蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鹹酥蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>奶油蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>麻奶蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>香辣啤酒蝦</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>藥膳蝦鍋 - $950</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>燒酒蝦鍋 - $1050</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>藥膳蝦雞鍋 - $1200</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>螃蟹料理</h3>
+        <div class="item"><span>鹹酥蟹 - $400</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>香辣蟹 - $400</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>避風塘炒蟹 - $400</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>沙公沙母（需預訂，時價）</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>湯品</h3>
+        <div class="item"><span>藥膳烏骨雞 - $750</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>剝皮辣椒雞 - $750</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蛤仔湯 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鮮蠣湯 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>燒酒雞 - $800</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>活魚料理</h3>
+        <div class="item"><span>鹽烤魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蒜頭魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>香辣魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>胡椒魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>糖醋魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>紅燒魚 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>下酒專區</h3>
+        <div class="item"><span>炙烤節瓜 - $200</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>烤鹹豬肉 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>牛肉串（5串） - $250</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>羊肉串（5串） - $250</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>雞肉串（5串） - $250</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>胡椒蛤蜊 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>奶油蛤蜊 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>胡椒鳳螺 - $500</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>魚蛋沙拉 - $250</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鯖魚一夜干 - $450</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>主食</h3>
+        <div class="item"><span>炒飯 - $150</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>炒麵 - $150</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <div class="menu-section">
+        <h3>私房料理</h3>
+        <div class="item"><span>蔥蛋 - $180</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>菜脯蛋 - $180</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>九層塔蛋 - $180</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>清炒空心菜 - $200</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>清炒高麗菜 - $200</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>麻香水蓮 - $200</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>金沙豆腐 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>港式蔥油雞 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>四季豆炒豬肉 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>龍珠花生 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蔥爆牛肉 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>三杯雞 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>金沙中卷 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>三杯中卷 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>塔香小卷 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>空心菜炒牛肉 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>空心菜炒羊肉 - $300</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>炒螺肉 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蒜蓉鮮蚵 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>蚵仔酥 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鐵板豆腐 - $250</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>糖醋里肌 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+        <div class="item"><span>鳳梨蝦球 - $280</span>
+    <div style="display: flex; align-items: center;">
+        <button onclick="changeQty(this, -1)" style="width: 30px;">−</button>
+        <input type="text" value="0" style="width: 40px; text-align: center;" readonly>
+        <button onclick="changeQty(this, 1)" style="width: 30px;">+</button>
+    </div>
+    </div>
+    </div>
+
+    <button class="submit-btn">送出訂單</button>
+
+<script>
+function changeQty(button, delta) {
+    const input = button.parentElement.querySelector('input');
+    let current = parseInt(input.value) || 0;
+    current = Math.max(0, current + delta);
+    input.value = current;
+}
+</script>
+
+<div id="order-summary" style="margin-top: 30px;">
+    <h2>點餐總結</h2>
+    <p>總金額：<span id="total-price">$0</span></p>
+    <button class="submit-btn" onclick="submitOrder()">送出訂單</button>
+</div>
+
+<script>
+function changeQty(button, delta) {
+    const input = button.parentElement.querySelector('input');
+    let current = parseInt(input.value) || 0;
+    current = Math.max(0, current + delta);
+    input.value = current;
+    calculateTotal();
+}
+
+function calculateTotal() {
+    const items = document.querySelectorAll(".item");
+    let total = 0;
+    items.forEach(item => {
+        const text = item.querySelector("span").innerText;
+        const input = item.querySelector("input");
+        let qty = parseInt(input.value) || 0;
+        let match = text.match(/\$(\d+)/);
+        if (match) {
+            let price = parseInt(match[1]);
+            total += price * qty;
+        }
+    });
+    document.getElementById("total-price").innerText = `$${total}`;
+}
+
+function submitOrder() {
+    let summary = "【大頭蝦啤酒屋 - 點餐內容】\n";
+    const items = document.querySelectorAll(".item");
+    items.forEach(item => {
+        const name = item.querySelector("span").innerText;
+        const qty = parseInt(item.querySelector("input").value) || 0;
+        if (qty > 0) {
+            summary += `× ${qty} - ${name}\n`;
+        }
+    });
+    summary += "\n" + document.getElementById("total-price").innerText;
+
+    alert(summary); // 模擬送出訂單，可改為串接後端或 LINE 通知
+}
+</script>
+</body>
+
+
+</html>
